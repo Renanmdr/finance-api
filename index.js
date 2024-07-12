@@ -1,1 +1,3 @@
-const user = ''
+const use = ''
+
+console.log(use)
