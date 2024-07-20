@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 import { randomUUID } from 'node:crypto'
-import { PostgresCreateUserRepository } from '../repositories/postgres/create-user'
+import { PostgresCreateUserRepository } from '../repositories/postgres/create-user.js'
 export class CreateUserUseCase {
   async execute(createUserParams) {
     const hashedPassword = await bcrypt.hash(createUserParams.password, 10)
