@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt'
 import { randomUUID } from 'node:crypto'
 import { PostgresCreateUserRepository } from '../repositories/postgres/create-user.js'
 import { PostgresGetUserByEmailRepository } from '../repositories/postgres/get-user-by-email.js'
+import { EmailAlrealInUseError } from '../errors/user.js'
 export class CreateUserUseCase {
   async execute(createUserParams) {
     const hashedPassword = await bcrypt.hash(createUserParams.password, 10)
@@ -12,7 +13,7 @@ export class CreateUserUseCase {
       await postgresGetUserByEmailRepository.execute(createUserParams.email)
 
     if (userWithProvidedEmail) {
-      throw new Error('The provided e-mail is already in use')
+      throw new EmailAlrealInUseError(createUserParams.email)
     }
 
     const user = {
