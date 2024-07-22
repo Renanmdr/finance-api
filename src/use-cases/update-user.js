@@ -1,7 +1,7 @@
-import { EmailAlrealInUseError } from '../errors/user'
-import { PostgresGetUserByEmailRepository } from '../repositories/postgres/get-user-by-email'
+import { EmailAlreadyInUseError } from '../errors/user.js'
+import { PostgresGetUserByEmailRepository } from '../repositories/postgres/get-user-by-email.js'
 import bcrypt from 'bcrypt'
-import { PostgresUpdateUserRepository } from '../repositories/postgres/update-user'
+import { PostgresUpdateUserRepository } from '../repositories/postgres/update-user.js'
 export class UpdateUserUseCase {
   async execute(userId, updateUserParams) {
     if (updateUserParams.email) {
@@ -10,8 +10,8 @@ export class UpdateUserUseCase {
       const userWithProvidedEmail =
         await postgresGetUserByEmailRepository.execute(updateUserParams.email)
 
-      if (userWithProvidedEmail) {
-        throw new EmailAlrealInUseError(updateUserParams.email)
+      if (userWithProvidedEmail && userWithProvidedEmail.id !== userId) {
+        throw new EmailAlreadyInUseError(updateUserParams.email)
       }
     }
 
