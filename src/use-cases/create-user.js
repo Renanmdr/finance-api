@@ -1,7 +1,10 @@
 import bcrypt from 'bcrypt'
 import { randomUUID } from 'node:crypto'
-import { PostgresCreateUserRepository } from '../repositories/postgres/create-user.js'
-import { PostgresGetUserByEmailRepository } from '../repositories/postgres/get-user-by-email.js'
+import {
+  PostgresCreateUserRepository,
+  PostgresGetUserByEmailRepository,
+} from '../repositories/postgres/index.js'
+
 import { EmailAlreadyInUseError } from '../errors/user.js'
 export class CreateUserUseCase {
   async execute(createUserParams) {
