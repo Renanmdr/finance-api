@@ -7,7 +7,7 @@ export class CreateTransactionUseCase {
   }
 
   async execute(createTransactionParams) {
-    const userId = createTransactionParams.userId
+    const userId = createTransactionParams.user_id
 
     const user = await this.getUserByIdRepository.execute(userId)
 
@@ -15,7 +15,7 @@ export class CreateTransactionUseCase {
       throw new UserNotFoundError(userId)
     }
 
-    const transaction = await this.createTransactionRepository({
+    const transaction = await this.createTransactionRepository.execute({
       ...createTransactionParams,
       id: randomUUID(),
     })
