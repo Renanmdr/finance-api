@@ -8,6 +8,7 @@ import {
   serverError,
   checkIfPasswordIsValid,
   validatedRequiredFilds,
+  requiredFieldIsMissingResponse,
 } from '../helpers/index.js'
 
 export class CreateUserController {
@@ -24,9 +25,7 @@ export class CreateUserController {
         validatedRequiredFilds(params, requiredFilds)
 
       if (!requiredFieldsWereProvided) {
-        return badRequest({
-          message: `The field ${missingField} is required.`,
-        })
+        return requiredFieldIsMissingResponse(missingField)
       }
       const passwordIsValid = checkIfPasswordIsValid(params.password)
 

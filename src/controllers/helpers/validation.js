@@ -5,6 +5,13 @@ export const checkIfIdIsValid = (id) => validator.isUUID(id)
 
 export const invalidIdResponse = () =>
   badRequest({ message: 'The Provided id is not valid.' })
+
+export const requiredFieldIsMissingResponse = (field) => {
+  return badRequest({
+    message: `The field ${field} is required.`,
+  })
+}
+
 export const checkIfString = (value) => typeof value === 'string'
 
 export const validatedRequiredFilds = (params, requiredFilds) => {
