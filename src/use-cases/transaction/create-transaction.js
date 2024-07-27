@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto'
-import { UserNotFoundError } from '../../errors/user'
+import { UserNotFoundError } from '../../errors/user.js'
 export class CreateTransactionUseCase {
   constructor(createTransactionRepository, getUserByIdRepository) {
     this.createTransactionRepository = createTransactionRepository

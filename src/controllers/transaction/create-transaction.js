@@ -16,10 +16,10 @@ export class CreateTransactionController {
     try {
       const params = httpRequest.body
 
-      const requiredFilds = ['id', 'user_id', 'name', 'date', 'amount', 'type']
+      const requiredFilds = ['user_id', 'name', 'date', 'amount', 'type']
 
       for (const field of requiredFilds) {
-        if (!params[field] || params[field].trim().length === 0) {
+        if (!params[field] || params[field].tostring().trim().length === 0) {
           return badRequest({ message: `Missing param ${field}` })
         }
       }
