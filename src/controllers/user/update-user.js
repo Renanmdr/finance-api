@@ -25,11 +25,11 @@ export class UpdateUserController {
         return invalidIdResponse()
       }
 
-      const Params = httpRequest.body
+      const params = httpRequest.body
 
       const allowedFields = ['first_name', 'last_name', 'email', 'password']
 
-      const someFieldIsNotAllowed = Object.keys(Params).some(
+      const someFieldIsNotAllowed = Object.keys(params).some(
         (field) => !allowedFields.includes(field),
       )
 
@@ -39,23 +39,23 @@ export class UpdateUserController {
         })
       }
 
-      if (Params.password) {
-        const passwordIsValid = checkIfPasswordIsValid(Params.password)
+      if (params.password) {
+        const passwordIsValid = checkIfPasswordIsValid(params.password)
 
         if (!passwordIsValid) {
           return invalidPasswordResponse()
         }
       }
 
-      if (Params.email) {
-        const emailIsValid = checkIfEmailIsValid(Params.email)
+      if (params.email) {
+        const emailIsValid = checkIfEmailIsValid(params.email)
 
         if (!emailIsValid) {
           return EmailAlredyInUseResponse()
         }
       }
 
-      const updatedUser = await this.updateUserUseCase.execute(userId, Params)
+      const updatedUser = await this.updateUserUseCase.execute(userId, params)
 
       return ok(updatedUser)
     } catch (error) {
