@@ -8,11 +8,5 @@ export class PostgresGetUserByEmailRepository {
         email,
       },
     })
-    // const user = await PostgresHelper.query(
-    //   'SELECT * FROM User WHERE email = $1',
-    //   [email]
-    // )
-
-    // return user[0]
   }
 }
